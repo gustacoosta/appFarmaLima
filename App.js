@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useFonts, Poppins_400Regular, Poppins_600SemiBold } from "@expo-google-fonts/poppins";
-import { View } from "react-native";
+import { View, TouchableOpacity } from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from 'react-native-vector-icons/Ionicons'
+//Importação para utilizar a função áudio
+import { Audio } from "expo-av";
 
-
+import Texto from "./src/componentes/Texto.js"
 import Produto from "./src/telas/produtos";
 import SobreNos from "./src/telas/sobre_nos";
 import Catalogo from "./src/telas/catalogo";
@@ -19,10 +21,47 @@ function MenuKit() {
   </View>
 }
 
-function PagProduto(){
+function PagProduto() {
   return <View>
     <Catalogo {...MocksCard} />
   </View>
+}
+
+function MenuAudio() {
+  //Áudio para o APP
+  const [audioStatus, setAudioStatus] = useState(false)
+  const [sound, setSound] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      console.log('status', audioStatus);
+      if (audioStatus) {
+        setLoading(true);
+        const { sound } = await Audio.Sound.createAsync(require('./assets/musica/acdc_highway_to_hell.mp3'));
+        setSound(sound);
+        try {
+          await sound.playAsync();
+        } catch (e) {
+          console.log(e);
+        }
+        setLoading(false);
+      } else {
+        if (sound) {
+          try {
+            await sound.stopAsync();
+            await sound.unloadAsync();
+          } catch (e) {
+            console.log(e);
+          }
+        }
+      }
+    })();
+  }, [audioStatus]);
+
+  return <TouchableOpacity onPress={() => { if (!loading) { setAudioStatus(!audioStatus); } }}>
+    <Texto>🎧 On/Off</Texto>
+  </TouchableOpacity>
 }
 
 const Tab = createBottomTabNavigator();
@@ -62,7 +101,6 @@ function TabsMenu() {
     <Tab.Screen name='Kit' component={MenuKit} />
     <Tab.Screen name='Lista de Desejos' component={MenuKit} />
     <Tab.Screen name='Sobre nós' component={SobreNos} />
-
   </Tab.Navigator>
 }
 
@@ -79,5 +117,6 @@ export default function App() {
 
   return <NavigationContainer>
     <TabsMenu />
+    <MenuAudio/>
   </NavigationContainer>
 }
