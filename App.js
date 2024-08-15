@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useFonts, Poppins_400Regular, Poppins_600SemiBold } from "@expo-google-fonts/poppins";
-import { View, TouchableOpacity } from "react-native";
+import { View, TouchableOpacity, StyleSheet} from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from 'react-native-vector-icons/Ionicons'
@@ -9,7 +9,7 @@ import { Audio } from "expo-av";
 
 import Texto from "./src/componentes/Texto.js"
 import Produto from "./src/telas/produtos";
-import SobreNos from "./src/telas/sobre_nos";
+import SobreNos from "./src/telas/sobre_nos/index.js";
 import Catalogo from "./src/telas/catalogo";
 
 import Mocks from "./src/mocks/produto";
@@ -38,7 +38,7 @@ function MenuAudio() {
       console.log('status', audioStatus);
       if (audioStatus) {
         setLoading(true);
-        const { sound } = await Audio.Sound.createAsync(require('./assets/musica/acdc_highway_to_hell.mp3'));
+        const { sound } = await Audio.Sound.createAsync(require('./assets/musica/Joakim Karud - Dreams · [Música Sem Direitos Autorais].mp3'));
         setSound(sound);
         try {
           await sound.playAsync();
@@ -59,8 +59,8 @@ function MenuAudio() {
     })();
   }, [audioStatus]);
 
-  return <TouchableOpacity onPress={() => { if (!loading) { setAudioStatus(!audioStatus); } }}>
-    <Texto>🎧 On/Off</Texto>
+  return <TouchableOpacity style={styles.audio} onPress={() => { if (!loading) { setAudioStatus(!audioStatus); } }}>
+    <Texto style={styles.texto} >🎧 On/Off</Texto>
   </TouchableOpacity>
 }
 
@@ -120,3 +120,14 @@ export default function App() {
     <MenuAudio/>
   </NavigationContainer>
 }
+
+const styles = StyleSheet.create({
+  audio: {
+      backgroundColor: 'white',
+  },
+  texto: {
+    textAlign: 'right',
+    fontSize: 12,
+    padding: 5,
+  },
+});
