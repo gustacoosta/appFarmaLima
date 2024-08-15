@@ -26,5 +26,10 @@ export default StyleSheet.create({
     logo: {
         width: 200,
         height: 200,
+    },
+    video: {
+        width: "100%",
+        padding: 90,
+        marginBottom: 60
     }
 });
