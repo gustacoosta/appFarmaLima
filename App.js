@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useFonts, Poppins_400Regular, Poppins_600SemiBold } from "@expo-google-fonts/poppins";
-import { View, TouchableOpacity, StyleSheet} from "react-native";
+import { View, TouchableOpacity, StyleSheet } from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from 'react-native-vector-icons/Ionicons'
@@ -11,6 +11,7 @@ import Texto from "./src/componentes/Texto.js"
 import Produto from "./src/telas/produtos";
 import SobreNos from "./src/telas/sobre_nos/index.js";
 import Catalogo from "./src/telas/catalogo";
+import Contato from "./src/telas/contato";
 
 import Mocks from "./src/mocks/produto";
 import MocksCard from "./src/mocks/catalogo";
@@ -101,6 +102,9 @@ function TabsMenu() {
     <Tab.Screen name='Kit' component={MenuKit} />
     <Tab.Screen name='Lista de Desejos' component={MenuKit} />
     <Tab.Screen name='Sobre nós' component={SobreNos} />
+    <Tab.Screen name="Contato" component={Contato} options={{
+      tabBarButton: () => null, 
+    }} />
   </Tab.Navigator>
 }
 
@@ -117,13 +121,13 @@ export default function App() {
 
   return <NavigationContainer>
     <TabsMenu />
-    <MenuAudio/>
+    <MenuAudio />
   </NavigationContainer>
 }
 
 const styles = StyleSheet.create({
   audio: {
-      backgroundColor: 'white',
+    backgroundColor: 'white',
   },
   texto: {
     textAlign: 'right',
