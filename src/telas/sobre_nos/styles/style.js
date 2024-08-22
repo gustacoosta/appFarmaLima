@@ -30,6 +30,19 @@ export default StyleSheet.create({
     video: {
         width: "100%",
         padding: 90,
-        marginBottom: 60
+        marginBottom: 30,
+    }, 
+    botaoContato: {
+        alignItems: 'center',
+        width: 150,
+        borderRadius: 20,
+        padding: 10,
+        marginBottom: 20,
+        fontSize: 15,
+        fontWeight: 'bold',
+        elevation: 2,
+        backgroundColor: '#ADFF2F',
+        marginRight: 'auto',
+        marginLeft: 'auto',
     }
 });
