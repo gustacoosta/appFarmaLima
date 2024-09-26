@@ -31,6 +31,7 @@ export default StyleSheet.create({
         margin: 5,
         backgroundColor: "white",
         borderRadius: 20,
+        padding: 0,
     },
     tituloCard: {
         height: 80,
@@ -55,12 +56,6 @@ export default StyleSheet.create({
         borderRadius: 20,
         height: 200,
         width: 200,
-    }, 
-    centeredView: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 22,
     },
     modalView: {
         margin: 20,
