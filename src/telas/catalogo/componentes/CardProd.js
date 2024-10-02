@@ -49,13 +49,11 @@ export default function CardProd({ item: { id, titulo, descricao, imagem, preco 
         }
     }
 
-    return <View style={styles.card}>
+    return <View style={styles.container}>
         <TouchableOpacity onPress={() => setModalVisible(true)}>
-            <Card style={styles.container}>
-
-                <Texto variant="titleLarge" style={styles.tituloCard}>{titulo}</Texto>
+            <Card style={styles.cardbtt}>
+                <Texto style={styles.tituloCard}>{titulo}</Texto>
                 <Card.Cover style={styles.imgProd} source={imagem} />
-
                 <Card.Actions>
                     <TouchableOpacity onPress={() => addListaDesejos(id, titulo, imagem)}>
                         <Ionicons name="heart" size={25} color='red' />

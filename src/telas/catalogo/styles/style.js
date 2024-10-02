@@ -25,7 +25,7 @@ export default StyleSheet.create({
     lista: {
         marginTop: 60,
     },
-    card: {
+    container: {
         alignItems: "center",
         width: "47%",
         margin: 5,
@@ -51,6 +51,7 @@ export default StyleSheet.create({
     imgProd: {
         borderRadius: 20,
         height: 200,
+        width: 190
     },
     imgModal: {
         borderRadius: 20,
@@ -89,5 +90,8 @@ export default StyleSheet.create({
     modalText: {
         marginBottom: 15,
         textAlign: 'center',
+    },
+    cardbtt: {
+        backgroundColor: 'white',
     },
 });
