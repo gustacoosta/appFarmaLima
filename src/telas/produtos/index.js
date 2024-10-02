@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, StyleSheet } from 'react-native';
 
 import Topo from "./componentes/Topo";
 import Detalhes from "./componentes/Detalhes";
@@ -10,6 +10,7 @@ import Item from "./componentes/Item";
 //npx expo install expo-font @expo-google-fonts/nome-da-fonte
 export default function Produto({ topo, detalhes, itens }) {
     return <FlatList
+        style={styles.fundo}
         data={itens.lista}
         renderItem={Item}
         keyExtractor={itens.lista.id}
@@ -21,3 +22,9 @@ export default function Produto({ topo, detalhes, itens }) {
         }}
     />
 }
+
+const styles = StyleSheet.create({
+    fundo: {
+        backgroundColor: "white",
+    },
+});
