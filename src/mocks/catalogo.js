@@ -1,5 +1,5 @@
 import protetor from "../../assets/catalogo/protetor.webp";
-import neutrogena from "../../assets/catalogo/neutrogena.webp";
+import neutrogena from "../../assets/catalogo/neutrogena.jpg";
 import organica from "../../assets/catalogo/organica.webp";
 import retinol from "../../assets/catalogo/retinol_payot.webp";
 import siage from "../../assets/catalogo/siage.webp";

@@ -12,6 +12,7 @@ import Produto from "./src/telas/produtos";
 import SobreNos from "./src/telas/sobre_nos/index.js";
 import Catalogo from "./src/telas/catalogo";
 import Contato from "./src/telas/contato";
+import ListaDesejos from "./src/telas/lista_desejo";
 
 import Mocks from "./src/mocks/produto";
 import MocksCard from "./src/mocks/catalogo";
@@ -100,7 +101,7 @@ function TabsMenu() {
       })}>
     <Tab.Screen name='Produtos' component={PagProduto} />
     <Tab.Screen name='Kit' component={MenuKit} />
-    <Tab.Screen name='Lista de Desejos' component={MenuKit} />
+    <Tab.Screen name='Lista de Desejos' component={ListaDesejos} />
     <Tab.Screen name='Sobre nós' component={SobreNos} />
     <Tab.Screen name="Contato" component={Contato} options={{
       tabBarButton: () => null, 
