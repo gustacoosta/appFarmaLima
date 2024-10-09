@@ -4,35 +4,51 @@ export default StyleSheet.create({
     listaContainer: {
         flex: 1,
         height: 100,
+        width: '100%',
+        backgroundColor: "#ADFF2F",
     },
     cardContainer: {
-        width: '50%',
-        height: 170,
+        width: '95%',
+        height: 170, 
+    },
+    contentContainer: {
+        flexDirection: 'row',          
+        justifyContent: 'space-between', 
+        alignItems: 'center',
+        marginVertical: 5,   
+    },
+    infoContainer: {
+        flexDirection: 'row',         
+        alignItems: 'left',         
     },
     imagem: {
-        width: "60%",
-        height: "60%",
-        alignSelf: "center",
+        width: 100,                    
+        height: 100,
+        marginRight: 5,               
     },
     card: {
         width: "90%",
         alignSelf: "center",
-        backgroundColor: "green",
+        backgroundColor: "white",
+        marginTop: 5,  
+        marginBottom: 10,  
     },
     nomeProduto: {
-        color: "white",
+        color: "black",
         fontWeight: "bold",
-        fontSize: 16,
-        textAlign: "center",
+        fontSize: 17,
+        paddingLeft: 4,
+        textAlign: "left", 
+        marginTop: 30,            
     },
     textoLista: {
         fontSize: 16,
-        paddingBottom: 10,
+        paddingBottom: 5,
         margin: 5,
     }, 
     lista: {
         height: 100,
-        padding: 0,
-        margin: 0,
+        paddingTop: 20,
+        paddingBottom: 20,
     }
 });

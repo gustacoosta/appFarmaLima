@@ -32,7 +32,7 @@ export default function ListaDesejos() {
             data={listData}
             renderItem={({item})=> <ListaItem {...item}/>} 
             keyExtractor={((item) => item.id)} 
-            numColumns={2}
+            numColumns={1}
         />
     </View>
 }
