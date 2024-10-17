@@ -34,18 +34,18 @@ export default function CardProd({ item: { id, titulo, descricao, imagem, preco 
             //A lista já possui itens
             const listaDesejos = JSON.parse(listaDesejosSalva);
             console.log(listaDesejos);
-            // await AsyncStorage.clear();
             //Insere mais um produto na lista
             listaDesejos.push({id:id, titulo:titulo, imagem:imagem});
-
+            
             //Converte um array para string 
             const listaDesejosAtualizada = JSON.stringify(listaDesejos);
-
+            
             //Insere o asyncStorage
             await AsyncStorage.setItem('ListaDesejos', listaDesejosAtualizada);
             Alert.alert("O produto foi inserido com sucesso na Lista de Desejos!");
             console.log("Mais um produto adicionado na Lista de Desejos");
             console.log(listaDesejosAtualizada);
+            // await AsyncStorage.clear();
         }
     }
 

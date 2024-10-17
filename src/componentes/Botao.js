@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#ADFF2F",
         paddingVertical: 16,
         borderRadius: 6,
+        alignItems: "center",
     },
     botaoTexto: {
         textAlign: "center",

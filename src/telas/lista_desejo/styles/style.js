@@ -6,9 +6,10 @@ export default StyleSheet.create({
         height: 100,
         width: '100%',
         backgroundColor: "#ADFF2F",
+        alignItems: 'center'
     },
     cardContainer: {
-        width: '95%',
+        width: 400,
         height: 170, 
     },
     contentContainer: {
@@ -50,5 +51,5 @@ export default StyleSheet.create({
         height: 100,
         paddingTop: 20,
         paddingBottom: 20,
-    }
+    },
 });

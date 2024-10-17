@@ -101,7 +101,7 @@ function TabsMenu() {
       })}>
     <Tab.Screen name='Produtos' component={PagProduto} />
     <Tab.Screen name='Kit' component={MenuKit} />
-    <Tab.Screen name='Lista de Desejos' component={ListaDesejos} />
+    <Tab.Screen name='Lista de Desejos' component={ListaDesejos} options={{unmountOnBlur: true}}/>
     <Tab.Screen name='Sobre nós' component={SobreNos} />
     <Tab.Screen name="Contato" component={Contato} options={{
       tabBarButton: () => null, 
