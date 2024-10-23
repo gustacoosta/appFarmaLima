@@ -53,5 +53,4 @@ const styles = StyleSheet.create({
         paddingVertical: 5,
         width: "100%"
     },
-
 });
