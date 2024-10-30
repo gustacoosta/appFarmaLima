@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { ScrollView, View, TextInput, TouchableOpacity, Image, Text, StyleSheet, Alert } from 'react-native';
+import { ScrollView, View, TextInput, TouchableOpacity, Image, Text, Alert } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { Camera } from 'expo-camera';
-import axios from 'axios'; // Importar Axios
+import axios from 'axios';
 
 import Texto from "../../componentes/Texto";
 import styles from "./styles/style";
+
+const API_KEY = "85062e0034a133bba9329573d4a5d183e1edc20d37d505fe953f67eb53eaa555";
 
 export default function Contato() {
     const [selectedValue, setSelectedValue] = useState("");
@@ -18,15 +20,28 @@ export default function Contato() {
     const [cep, setCep] = useState('');
     const [endereco, setEndereco] = useState(null); 
     const [description, setDescription] = useState('');
+    const [inboxId, setInboxId] = useState('');
 
     useEffect(() => {
         (async () => {
             const { status } = await Camera.requestCameraPermissionsAsync();
             setHasPermission(status === 'granted');
         })();
+
+        // Criar uma caixa de entrada ao iniciar
+        createInbox();
     }, []);
 
-    // Função para buscar o endereço usando a API do ViaCEP
+    // Função para criar uma inbox
+    const createInbox = async () => {
+        try {
+            const response = await axios.post(`https://api.mailslurp.com/createInbox?apiKey=${API_KEY}`);
+            setInboxId(response.data.id);
+        } catch (error) {
+            Alert.alert('Erro', 'Erro ao criar a caixa de entrada.');
+        }
+    };
+
     const buscarEndereco = async () => {
         if (cep.length !== 8) {
             Alert.alert('Erro', 'Por favor, insira um CEP válido com 8 dígitos.');
@@ -49,38 +64,49 @@ export default function Contato() {
     const takePicture = async () => {
         if (cameraRef) {
             const photo = await cameraRef.takePictureAsync();
-            console.log(photo.uri);
             setImageUri({ uri: photo.uri });
             setIsCameraVisible(false);
         }
     };
 
-    const handleSubmit = () => {
-        if (!name || !email || !selectedValue || !cep) {
+    const handleSubmit = async () => {
+        if (!name || !email || !selectedValue || !cep || !inboxId) {
             Alert.alert('Erro', 'Por favor, preencha todos os campos obrigatórios.');
             return;
         }
-    
-        // Exemplo de validação de email (simples)
+
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
             Alert.alert('Erro', 'Por favor, insira um e-mail válido.');
             return;
         }
-    
-        // Aqui você pode adicionar o código para enviar os dados do formulário
-        Alert.alert('Sucesso', 'Formulário enviado com sucesso!');
-    
-        // Limpar os campos após o envio
-        setName('');
-        setEmail('');
-        setCep('');
-        setSelectedValue('');
-        setEndereco(null); // Limpar o endereço preenchido
-        setDescription('');
-        setImageUri(null); // Limpar a foto, se for necessário
+
+        try {
+            await axios({
+                method: "POST",
+                url: `https://api.mailslurp.com/sendEmail?apiKey=${API_KEY}`,
+                data: {
+                    senderId: inboxId,
+                    to: email,
+                    subject: "Contato - FarmaLima",
+                    body: `Olá, recebemos o seu e-mail referente a ${selectedValue}. Confirme os seus dados:\n Nome: ${name}\n Endereço: ${endereco.logradouro}, ${endereco.bairro}, ${endereco.localidade} - ${endereco.uf}\n Descrição: ${description}`,
+                },
+            });
+
+            Alert.alert('Sucesso', 'Formulário enviado com sucesso!');
+
+            // Limpar os campos 
+            setName('');
+            setEmail('');
+            setCep('');
+            setSelectedValue('');
+            setEndereco(null); 
+            setDescription('');
+            setImageUri(null);
+        } catch (error) {
+            Alert.alert('Erro', 'Erro ao enviar o e-mail. Tente novamente.');
+        }
     };
-    
 
     if (hasPermission === null) {
         return <Text>Solicitando permissão da câmera...</Text>;
@@ -118,7 +144,7 @@ export default function Contato() {
                     onChangeText={setCep}
                     keyboardType="numeric"
                     maxLength={8}
-                    onBlur={buscarEndereco} // Busca o endereço quando o campo perde o foco
+                    onBlur={buscarEndereco} 
                 />
 
                 {endereco && (
