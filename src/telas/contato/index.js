@@ -89,7 +89,7 @@ export default function Contato() {
                     senderId: inboxId,
                     to: email,
                     subject: "Contato - FarmaLima",
-                    body: `Olá, recebemos o seu e-mail referente a ${selectedValue}. Confirme os seus dados:\n Nome: ${name}\n Endereço: ${endereco.logradouro}, ${endereco.bairro}, ${endereco.localidade} - ${endereco.uf}\n Descrição: ${description}`,
+                    body: `Olá ${name}, recebemos o seu e-mail referente a ${selectedValue}. Confirme os seus dados:\n Endereço: ${endereco.logradouro}, ${endereco.bairro}, ${endereco.localidade} - ${endereco.uf}\n Descrição: ${description}`,
                 },
             });
 
